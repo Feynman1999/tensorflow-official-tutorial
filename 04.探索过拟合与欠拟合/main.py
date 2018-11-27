@@ -13,7 +13,7 @@ print(train_data.shape)
 
 def multi_hot_sequences(sequences, dimension):
     # create an all_zero matrix of shape(len(sequences), dimension)
-    results = np.zeros(  (len(sequences), dimension)  ) #提供一个元组
+    results = np.zeros(  (len(sequences), dimension)  ) # 参数应该提供一个元组
     for i, word_indices in enumerate(sequences): # 可同时获得索引和值
         results[i,word_indices] = 1.0
     return results
@@ -33,12 +33,11 @@ baseline_model = keras.Sequential([
     keras.layers.Dense(16, activation=tf.nn.relu),
     keras.layers.Dense(1, activation=tf.nn.sigmoid)
 ])
-
 baseline_model.compile( optimizer = 'adam',
                         loss='binary_crossentropy',
                         metrics=['accuracy','binary_crossentropy'])
-
 baseline_model.summary()
+
 
 
 smaller_model = keras.Sequential([
@@ -46,11 +45,9 @@ smaller_model = keras.Sequential([
     keras.layers.Dense(4,activation=tf.nn.relu),
     keras.layers.Dense(1,activation=tf.nn.sigmoid)
 ])
-
 smaller_model.compile(optimizer='adam',
                       loss='binary_crossentropy',
                       metrics=['accuracy','binary_crossentropy'])
-
 smaller_model.summary()
 
 
@@ -60,12 +57,12 @@ bigger_model =  keras.Sequential([
     keras.layers.Dense(512, activation=tf.nn.relu),
     keras.layers.Dense(1,   activation=tf.nn.sigmoid)
 ])
-
 bigger_model.compile(optimizer='adam',
                      loss='binary_crossentropy',
                      metrics=['accuracy','binary_crossentropy'])
-
 bigger_model.summary()
+
+
 
 baseline_model_l2 = keras.Sequential([
     keras.layers.Dense(16, activation=tf.nn.relu, kernel_regularizer=keras.regularizers.l2(0.001),
@@ -73,12 +70,25 @@ baseline_model_l2 = keras.Sequential([
     keras.layers.Dense(16, activation=tf.nn.relu, kernel_regularizer=keras.regularizers.l2(0.001)),
     keras.layers.Dense(1, activation=tf.nn.sigmoid)
 ])
-
 baseline_model_l2.compile(optimizer='adam',
                             loss='binary_crossentropy',
                             metrics=['accuracy','binary_crossentropy'])
-
 baseline_model_l2.summary()
+
+
+
+baseline_model_dropout = keras.Sequential([
+    keras.layers.Dense(16, activation=tf.nn.relu, input_shape=(NUM_WORDS, )),
+    keras.layers.Dropout(0.5),
+    keras.layers.Dense(16, activation=tf.nn.relu),
+    keras.layers.Dropout(0.5),
+    keras.layers.Dense(1, activation=tf.nn.sigmoid)
+])
+baseline_model_dropout.compile(optimizer='adam',
+                                loss='binary_crossentropy',
+                                metrics=['accuracy','binary_crossentropy'])
+baseline_model_dropout.summary()                                
+
 
 
 '''
@@ -96,8 +106,8 @@ def train_model(model):
 a= train_model(baseline_model)
 # b= train_model(smaller_model)
 # c= train_model(bigger_model)
-d = train_model(baseline_model_l2)
-
+# d = train_model(baseline_model_l2)
+e = train_model(baseline_model_dropout)
 
 
 '''
@@ -119,6 +129,7 @@ def plot_history(histories, key='binary_crossentropy'):
 plot_history([('baseline',a),
               #('smaller_model',b),
               #('bigger_model',c),
-              ('baseline_l2',d)])
+              #('baseline_l2',d),
+              ('baseline_dropout',e)])
 plt.show()
 
