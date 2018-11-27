@@ -47,6 +47,7 @@ print(train_labels[0:10])
 # 按照列求平均 （很自然）和 标准差
 mean = train_data.mean(axis = 0)
 std = train_data.std(axis = 0)
+#print(mean.shape,std.shape)
 train_data = (train_data - mean) / std
 test_data = (test_data - mean) / std
 print(train_data[0]) # First training sample , normalized
