@@ -2,3 +2,7 @@
 05\.保存和恢复模型/training_1/
 
 05\.保存和恢复模型/training_2/
+
+05\.保存和恢复模型/checkpoints/
+
+*.h5
