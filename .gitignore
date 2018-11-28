@@ -6,3 +6,9 @@
 05\.保存和恢复模型/checkpoints/
 
 *.h5
+
+*.data-00000-of-00001
+
+*.index
+
+training_1/checkpoint
