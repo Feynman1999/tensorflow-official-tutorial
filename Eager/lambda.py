@@ -8,7 +8,7 @@
 # y1 =get_y(100,1)
 # print(y1(1))
 
-
+ 
 def get_y(a,b):
     def func(x):
         return a*x+b
