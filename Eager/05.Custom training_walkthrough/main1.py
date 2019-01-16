@@ -3,6 +3,7 @@ import os
 import matplotlib.pyplot as plt
 import tensorflow as tf 
 import numpy as np
+os.environ['CUDA_VISIBLE_DEVICES'] = "0"
 
 tf.enable_eager_execution()
 tfe = tf.contrib.eager

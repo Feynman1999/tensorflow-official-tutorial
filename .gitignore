@@ -12,3 +12,5 @@
 *.index
 
 training_1/checkpoint
+
+Generative models/DCGAN/mnist/training_checkpoints/
